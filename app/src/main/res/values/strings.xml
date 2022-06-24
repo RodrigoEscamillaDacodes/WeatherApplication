@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="api_key">e122c38d01c536a1064244ece154fb9d</string>
+    <string name="base_url">http://api.openweathermap.org/</string>
+    <string name="city_placeholder">Ingresa una ciudad</string>
+    <string name="search">Buscar</string>
 </resources>
