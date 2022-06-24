@@ -22,31 +22,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:background="@color/cardview_dark_background"
+            android:background="@color/dark_gray"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_city"
+            <EditText
+                android:id="@+id/et_city"
+                android:background="@drawable/bg_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="15sp"
                 android:hint="@string/city_placeholder"
-                app:endIconDrawable="@drawable/ic_search"
-                app:endIconMode="custom"
+                android:text="@={viewModel.cityName}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_search">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_city"
-                    android:background="@drawable/bg_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@={viewModel.cityName}"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
+                app:layout_constraintEnd_toStartOf="@id/btn_search"/>
 
             <Button
                 android:id="@+id/btn_search"
@@ -56,25 +48,23 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:background="@android:color/transparent"
-                app:layout_constraintTop_toTopOf="@id/til_city"
-                app:layout_constraintBottom_toBottomOf="@id/til_city"
+                app:layout_constraintTop_toTopOf="@id/et_city"
+                app:layout_constraintBottom_toBottomOf="@id/et_city"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cd_info"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="200dp"
             android:layout_margin="20dp"
             app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="@android:color/darker_gray"
+            app:cardBackgroundColor="@color/gray"
             app:layout_constraintTop_toBottomOf="@id/cl_header"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_container"
@@ -85,7 +75,7 @@
                     android:id="@+id/tv_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No results found"
+                    android:text="@string/not_found"
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="15sp"

@@ -4,4 +4,5 @@
     <string name="base_url">http://api.openweathermap.org/</string>
     <string name="city_placeholder">Ingresa una ciudad</string>
     <string name="search">Buscar</string>
+    <string name="not_found">No results found</string>
 </resources>

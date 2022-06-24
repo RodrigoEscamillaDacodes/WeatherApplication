@@ -31,7 +31,6 @@ class CitiesFragment : BaseFragment<CitiesFragmentBinding>(R.layout.cities_fragm
             }
         }
 
-
         citiesViewModel.cityInfo.observe(viewLifecycleOwner, EventObserver{ result ->
             handleViewModelResult(
                 result,
@@ -41,7 +40,7 @@ class CitiesFragment : BaseFragment<CitiesFragmentBinding>(R.layout.cities_fragm
                 { _, ex ->
                     when(ex){
                         is NotFoundException -> {
-                            binding.tvInfo.text = "Not found"
+                            binding.tvInfo.text = getString(R.string.not_found)
                         }
                     }
                 }

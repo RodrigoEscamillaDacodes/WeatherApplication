@@ -29,7 +29,7 @@ class CitiesViewModel @Inject constructor(
     fun searchCityInfo() = results(_cityInfo){
         val cityResponse = getCityInfoUseCase(params = cityName)
         if(cityResponse.isEmpty()){
-            _cityInfo.value = Event(ViewModelResult.Error("Not found",NotFoundException()))
+            _cityInfo.value = Event(ViewModelResult.Error("",NotFoundException()))
         }else{
             _cityInfo.value = Event(ViewModelResult.Success(cityResponse.first()))
         }
