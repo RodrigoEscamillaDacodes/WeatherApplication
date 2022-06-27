@@ -20,7 +20,7 @@ class NetworkHelper @Inject constructor(
 ) {
 
     suspend fun isInternetOn(): Boolean {
-        return withContext(dispatcher){
+        return withContext(dispatcher) {
             if (isNetworkAvailable()) {
                 try {
                     val httpConnection: HttpURLConnection =
@@ -31,14 +31,15 @@ class NetworkHelper @Inject constructor(
                     httpConnection.connectTimeout = 1500
                     httpConnection.connect()
 
-                     httpConnection.responseCode == 204
+                    httpConnection.responseCode == 204
                 } catch (e: IOException) {
                     e.printStackTrace()
+                    false
                 }
+            } else {
+                false
             }
-             false
         }
-
     }
 
     private fun isNetworkAvailable(): Boolean {
