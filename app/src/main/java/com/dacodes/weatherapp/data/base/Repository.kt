@@ -1,6 +1,5 @@
 package com.dacodes.weatherapp.data.base
 
-import android.content.Context
 import android.util.Log
 import com.dacodes.weatherapp.core.presentation.CoroutineDispatchers
 import com.dacodes.weatherapp.data.model.ApiError
@@ -11,8 +10,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 abstract class Repository(
-    protected val coroutineDispatchers: CoroutineDispatchers,
-    private val context: Context
+    protected val coroutineDispatchers: CoroutineDispatchers
 ) {
 
     protected suspend fun <T> safeApiCall(
