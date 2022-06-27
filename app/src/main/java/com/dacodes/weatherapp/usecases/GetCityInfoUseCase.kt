@@ -3,6 +3,7 @@ package com.dacodes.weatherapp.usecases
 import com.dacodes.weatherapp.core.presentation.CoroutineUseCase
 import com.dacodes.weatherapp.core.presentation.IoDispatcher
 import com.dacodes.weatherapp.core.presentation.NetworkHelper
+import com.dacodes.weatherapp.core.presentation.clearText
 import com.dacodes.weatherapp.data.database.entities.toDataBase
 import com.dacodes.weatherapp.domain.model.City
 import com.dacodes.weatherapp.domain.repository.CityRepository
@@ -24,7 +25,7 @@ class GetCityInfoUseCase @Inject constructor(
             cityRepository.insertCity(response.first().toDataBase())
             response
         }else{
-            val cities = cityRepository.getCityInfoFromDB(params)
+            val cities = cityRepository.getCityInfoFromDB(params.clearText())
             cities
         }
     }

@@ -85,11 +85,8 @@ object AppModule {
     fun cityRepository(
         coroutineDispatchers: CoroutineDispatchers,
         cityApi: ApiService,
-        @ApplicationContext
-        context: Context,
         daoCity: DAOCity
     ): CityRepository = CityRepositoryImpl(
-        context,
         coroutineDispatchers,
         cityApi,
         daoCity
