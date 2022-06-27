@@ -20,3 +20,7 @@ fun CoroutineScope.safeLaunch(
         }
     }
 }
+
+fun String.clearText() : String{
+    return replace(" ","")
+}

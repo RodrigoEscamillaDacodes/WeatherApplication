@@ -1,6 +1,5 @@
 package com.dacodes.weatherapp.data.base
 
-import android.content.Context
 import android.util.Log
 import com.dacodes.weatherapp.core.presentation.CoroutineDispatchers
 import com.dacodes.weatherapp.data.model.ApiError
@@ -11,8 +10,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 abstract class Repository(
-    protected val coroutineDispatchers: CoroutineDispatchers,
-    private val context: Context
+    protected val coroutineDispatchers: CoroutineDispatchers
 ) {
 
     protected suspend fun <T> safeApiCall(
@@ -27,7 +25,7 @@ abstract class Repository(
                 is HttpException -> {
                     val apiError = convertErrorBody(ex)
                     throw NetworkException(
-                        apiError?.codeApi?.parseCodeError(context) ?: ex.localizedMessage,
+                        apiError?.message ?: ex.localizedMessage,
                         ex
                     )
                 }
@@ -46,12 +44,4 @@ abstract class Repository(
         }
     }
 
-    private fun String.parseCodeError(context: Context): String {
-        val resId = context.resources.getIdentifier(this, "string", context.packageName)
-        return if (resId != 0) {
-            context.getString(resId)
-        } else {
-            "Algo anduvo mal, intenta más tarde."
-        }
-    }
 }

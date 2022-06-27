@@ -1,4 +1,4 @@
-package com.dacodes.weatherapp.presentation
+package com.dacodes.weatherapp.presentation.main
 
 import android.os.Bundle
 import com.dacodes.weatherapp.R

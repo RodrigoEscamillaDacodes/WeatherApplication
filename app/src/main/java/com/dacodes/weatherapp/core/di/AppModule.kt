@@ -69,13 +69,11 @@ object AppModule {
     @Provides
     @Singleton
     fun cityApi(
-        client: OkHttpClient,
-        @ApplicationContext
-        context: Context
+        client: OkHttpClient
     ): ApiService =
         Retrofit.Builder()
             .client(client)
-            .baseUrl(context.getString(R.string.base_url))
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
             .create(ApiService::class.java)
@@ -85,11 +83,8 @@ object AppModule {
     fun cityRepository(
         coroutineDispatchers: CoroutineDispatchers,
         cityApi: ApiService,
-        @ApplicationContext
-        context: Context,
         daoCity: DAOCity
     ): CityRepository = CityRepositoryImpl(
-        context,
         coroutineDispatchers,
         cityApi,
         daoCity

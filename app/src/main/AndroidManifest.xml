@@ -15,8 +15,9 @@
         android:theme="@style/Theme.WeatherApp"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.MainActivity"
-            android:exported="true">
+            android:name=".presentation.main.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

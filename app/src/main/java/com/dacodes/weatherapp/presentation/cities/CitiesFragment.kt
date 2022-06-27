@@ -48,10 +48,13 @@ class CitiesFragment : BaseFragment<CitiesFragmentBinding>(R.layout.cities_fragm
                     { city ->
                         tvInfo.text = "${getString(R.string.city_name)} ${city.name} \n\n${getString(R.string.country_code)} ${city.country} \n\n${getString(R.string.latitude)} ${city.latitude}\n\n${getString(R.string.longitude)} ${city.longitude}"
                     },
-                    { _, ex ->
+                    { error, ex ->
                         when(ex){
                             is NotFoundException -> {
                                 tvInfo.text = getString(R.string.not_found)
+                            }
+                            else -> {
+                                showErrorMessage(error)
                             }
                         }
                     },
