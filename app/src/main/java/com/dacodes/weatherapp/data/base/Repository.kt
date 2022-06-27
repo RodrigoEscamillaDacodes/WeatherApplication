@@ -27,7 +27,7 @@ abstract class Repository(
                 is HttpException -> {
                     val apiError = convertErrorBody(ex)
                     throw NetworkException(
-                        apiError?.codeApi?.parseCodeError(context) ?: ex.localizedMessage,
+                        apiError?.message ?: ex.localizedMessage,
                         ex
                     )
                 }
@@ -46,12 +46,4 @@ abstract class Repository(
         }
     }
 
-    private fun String.parseCodeError(context: Context): String {
-        val resId = context.resources.getIdentifier(this, "string", context.packageName)
-        return if (resId != 0) {
-            context.getString(resId)
-        } else {
-            "Algo anduvo mal, intenta más tarde."
-        }
-    }
 }
