@@ -5,4 +5,9 @@
     <string name="city_placeholder">Ingresa una ciudad</string>
     <string name="search">Buscar</string>
     <string name="not_found">No results found</string>
+    <string name="city_name">Name:</string>
+    <string name="country_code">Country code:</string>
+    <string name="latitude">Latitude:</string>
+    <string name="longitude">Longitude</string>
+    <string name="loading">Cargando...</string>
 </resources>

@@ -1,9 +1,11 @@
 package com.dacodes.weatherapp.core.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -14,6 +16,7 @@ abstract class BaseFragment<VDB : ViewDataBinding>(
     protected val layoutId: Int,
 ) : Fragment(){
 
+    protected val loader by lazy { LoaderDialog(requireActivity()) }
     protected lateinit var binding: VDB
 
     override fun onCreateView(
@@ -48,6 +51,13 @@ abstract class BaseFragment<VDB : ViewDataBinding>(
         }
     }
 
+    internal fun hideKeyboard() {
+        val view = requireActivity().findViewById<View>(android.R.id.content)
+        if (view != null) {
+            val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
 
 
 }
