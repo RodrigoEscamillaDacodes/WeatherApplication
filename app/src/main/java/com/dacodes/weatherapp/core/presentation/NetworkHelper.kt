@@ -5,6 +5,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -12,26 +14,31 @@ import javax.inject.Inject
 
 class NetworkHelper @Inject constructor(
     @ApplicationContext
-    private val context: Context
+    private val context: Context,
+    @IoDispatcher
+    private val dispatcher: CoroutineDispatcher,
 ) {
 
-    fun isInternetOn(): Boolean {
-        if (isNetworkAvailable()) {
-            try {
-                val httpConnection: HttpURLConnection =
-                    URL("http://clients3.google.com/generate_204")
-                        .openConnection() as HttpURLConnection
-                httpConnection.setRequestProperty("User-Agent", "Android")
-                httpConnection.setRequestProperty("Connection", "close")
-                httpConnection.connectTimeout = 1500
-                httpConnection.connect()
+    suspend fun isInternetOn(): Boolean {
+        return withContext(dispatcher){
+            if (isNetworkAvailable()) {
+                try {
+                    val httpConnection: HttpURLConnection =
+                        URL("http://clients3.google.com/generate_204")
+                            .openConnection() as HttpURLConnection
+                    httpConnection.setRequestProperty("User-Agent", "Android")
+                    httpConnection.setRequestProperty("Connection", "close")
+                    httpConnection.connectTimeout = 1500
+                    httpConnection.connect()
 
-                return httpConnection.responseCode == 204
-            } catch (e: IOException) {
-                e.printStackTrace()
+                     httpConnection.responseCode == 204
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
             }
+             false
         }
-        return false
+
     }
 
     private fun isNetworkAvailable(): Boolean {
