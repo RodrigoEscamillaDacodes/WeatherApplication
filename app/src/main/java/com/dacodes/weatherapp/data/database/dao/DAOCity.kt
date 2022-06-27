@@ -10,7 +10,7 @@ interface DAOCity {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCity(model: CityEntity)
 
-    @Query("SELECT * FROM citytable WHERE name = :cityName")
+    @Query("SELECT * FROM citytable WHERE name LIKE :cityName")
     suspend fun getCity(cityName: String): List<CityEntity>
 
     @Query("DELETE FROM citytable WHERE name = :cityName")
